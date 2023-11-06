@@ -24,3 +24,13 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+class SignView(APIView):
+    def post(self, request):
+        username = request.data["username"]
+        password = request.data["password"]
+        email = request.data["email"]
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+
+        return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
