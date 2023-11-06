@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
+from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 class HomeView(APIView):
     permission_classes = (IsAuthenticated, )
@@ -27,10 +29,13 @@ class LogoutView(APIView):
         
 class SignView(APIView):
     def post(self, request):
-        username = request.data["username"]
-        password = request.data["password"]
-        email = request.data["email"]
+        if "username" in request.data and "password" in request.data and "email" in request.data:
+            username = request.data["username"]
+            password = request.data["password"]
+            email = request.data["email"]
 
-        user = User.objects.create_user(username=username, email=email, password=password)
+            user = User.objects.create_user(username=username, email=email, password=password)
 
-        return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+            return JsonResponse({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        else:
+            return JsonResponse({'message': 'Invalid Request!'}, status=400)
