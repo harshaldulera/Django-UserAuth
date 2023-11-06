@@ -1,9 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Home () {
+const Home = () => {
     return (
-        <div>
-            <h1>Welcome To Home Page.</h1>
+        <div className="home-container">
+            <h1>Welcome to the Home Page</h1>
+            <div className="button-cont">
+                <Link to="/signin">
+                    <button className="Sign-In">Sign In</button>
+                </Link>
+                <Link to="/signup">
+                    <button className="Sign-Up">Sign Up</button>
+                </Link>
+            </div>
         </div>
     )
 }
