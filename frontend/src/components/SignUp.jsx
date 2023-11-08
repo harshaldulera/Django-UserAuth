@@ -19,11 +19,9 @@ const SignUp = () => {
                 email: email,
             };
 
-            const response = await axios.post("/signup", user, {
-                headers: {"Content-Type": "application/json"},
-            });
+            const {data} = await axios.post('http://localhost:8000/token/', user, {headers:{'Content-Type': 'application/json'}}, {withCredentials: true});
 
-            console.log("signup done", response.data);
+            console.log("signup done", data);
             navigate("/signin");    
         } catch (error) {
             console.log(error);

@@ -24,7 +24,7 @@ const SignIn = () => {
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
             axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-            window.location.href = '/'
+            // window.location.href = '/'
         } catch (error) {
             console.error(error);
             setError("Error signing in please try again");
